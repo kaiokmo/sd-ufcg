@@ -1,1 +1,1 @@
-# sd-ufcg
+# Sistemas Distribuídos - UFCG - 2018.1

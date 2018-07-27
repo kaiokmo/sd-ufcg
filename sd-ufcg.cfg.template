@@ -1,0 +1,10 @@
+[kubernetes]
+username=<@username>
+password=<@password>
+
+[monitoring]
+username=<@username>
+password=<@password>
+project_name=<@project_name>
+auth_url=<@auth_url>
+monasca_api_version=2_0
