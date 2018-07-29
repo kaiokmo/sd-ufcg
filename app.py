@@ -1,13 +1,13 @@
 from flask import Flask
 app = Flask(__name__)
 
-# Rota para cálculo de fatorial passado por
-# parâmetro em /fatorial/<numero>.
+# Rota para calculo de fatorial passado por
+# parametro em /fatorial/<numero>.
 @app.route('/fatorial/<int:numero>')
 def calcularFatorial(numero):
     return str(fatorial(numero))
 
-## Cálcula o fatorial passado por parâmetro.
+## Calcula o fatorial passado por parametro.
 def fatorial(numero):
     if(numero < 0):
         return -1
