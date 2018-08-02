@@ -1,4 +1,5 @@
 from flask import Flask
+import sys
 app = Flask(__name__)
 
 # Rota para calculo de fatorial passado por
@@ -16,4 +17,5 @@ def fatorial(numero):
     return numero * fatorial(numero-1)
 
 if __name__ == '__main__':
-    app.run()
+    sys.setrecursionlimit(1000000000)
+    app.run(host="0.0.0.0")
