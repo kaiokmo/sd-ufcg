@@ -5,6 +5,18 @@ metadata:
   name: fatorial
   labels:
     app: fatorial
+  annotations:
+    federation.kubernetes.io/replica-set-preferences: {
+        "rebalance": true,
+        "clusters": {
+          "gondor": {
+            "weight": 1
+          },
+          "rivendell": {
+            "weight": 0
+          }
+        }
+      }
 spec:
   replicas: 1
   selector:

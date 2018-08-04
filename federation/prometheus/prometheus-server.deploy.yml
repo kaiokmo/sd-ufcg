@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-server
+  namespace: monitoring
+  labels:
+    app: prometheus-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: prometheus-server
+  template:
+    metadata:
+      labels:
+        app: prometheus-server
+    spec:
+      containers:
+      - name: prometheus-server
+        image: vinhags/prometheus
+        command: ["./prometheus", "--config.file=./config/prometheus-gondor.yml"]
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+        - name: config-volume
+          mountPath: /prometheus/config/
+      volumes:
+      - name: config-volume
+        configMap:
+          name: prometheus-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheus-server
+  name: prometheus-server
+  namespace: monitoring
+spec:
+  type: NodePort
+  ports:
+  - name: https
+    port: 9090
+    nodePort: 30112
+    targetPort: 9090
+  selector:
+    app: prometheus-server
