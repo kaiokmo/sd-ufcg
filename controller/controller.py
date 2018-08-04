@@ -2,11 +2,16 @@ import time
 import ConfigParser
 import ast
 import logging
+import sys
 
 from monitor.monitor import Monitor
+import redis
 
 class Controller:
     def __init__(self, clusters):
+        redis_host = sys.argv[1]
+        redis_port = sys.argv[2]
+        self.redis = redis.Redis(host=redis_host, port=redis_port)
         self.monitors = []
         for cluster in clusters:
             addr = config.get(cluster, "address")
@@ -20,7 +25,15 @@ class Controller:
                 status = monitor.check_status()
                 federated_metrics[status[0]] = status[1]
             time.sleep(5)
+            self._publish_metrics(federated_metrics)
             logging.info(federated_metrics)
+    
+    def _publish_metrics(self, json):
+        self.redis.lpush(
+            "federated:metrics",
+            json
+        )
+
 
 config = ConfigParser.ConfigParser()
 config.read('controller.cfg')
