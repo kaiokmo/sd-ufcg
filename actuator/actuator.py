@@ -1,20 +1,24 @@
+# -*- coding: utf-8 -*-
+""" module actuator
+        collects metrics and analyses.
+"""
 import ConfigParser
 import logging
 import time
 
 from collector.collector import Collector
 
-logging.basicConfig(filename='actuator.log',level=logging.INFO)
+logging.basicConfig(filename='actuator.log', level=logging.INFO)
 logging.getLogger("requests").setLevel(logging.WARNING)
 logging.info("Reading configuration file")
-config = ConfigParser.ConfigParser()
-config.read('actuator.cfg')
-redis_host = config.get("REDIS", "address")
-redis_port = config.get("REDIS", "port")
-collector = Collector(redis_host, redis_port)
+CONFIG = ConfigParser.ConfigParser()
+CONFIG.read('actuator.cfg')
+REDIS_HOST = CONFIG.get("REDIS", "address")
+REDIS_PORT = CONFIG.get("REDIS", "port")
+COLLECTOR = Collector(REDIS_HOST, REDIS_PORT)
 
 
 while True:
-    metric = collector.collect_recent()
-    print metric
+    METRIC = COLLECTOR.collect_recent()
+    print METRIC
     time.sleep(7)
