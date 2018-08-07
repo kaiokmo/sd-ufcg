@@ -1,3 +1,17 @@
-for i in {1..100000}; do
-    curl http://10.11.4.:5000/fatorial/20000 &
-done
+for i in {1..3000}; do curl -s 10.11.4.220:30666/fatorial/20000 >> /dev/null & done
+sleep 12;
+for i in {1..3000}; do curl -s 10.11.4.220:30666/fatorial/20000 >> /dev/null & done
+sleep 12;
+for i in {1..3000}; do curl -s 10.11.4.220:30666/fatorial/20000 >> /dev/null & done
+sleep 12;
+for i in {1..3000}; do curl -s 10.11.4.220:30666/fatorial/20000 >> /dev/null & done
+
+sleep 30;
+
+for i in {1..3000}; do curl -s 10.11.4.144:30666/fatorial/20000 >> /dev/null & done
+sleep 12;
+for i in {1..3000}; do curl -s 10.11.4.144:30666/fatorial/20000 >> /dev/null & done
+sleep 12;
+for i in {1..3000}; do curl -s 10.11.4.144:30666/fatorial/20000 >> /dev/null & done
+sleep 12;
+for i in {1..3000}; do curl -s 10.11.4.144:30666/fatorial/20000 >> /dev/null & done
